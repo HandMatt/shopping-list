@@ -1,0 +1,34 @@
+[package]
+name = "shopping-list"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Asynchronous runtime
+tokio = { version = "1", features = ["full"] }
+# Foundations for asynchronous programming
+futures = "0.3"
+# Derive macro for the Error trait
+thiserror = "1.0"
+
+# JSON libs
+# Serializing and deserializing data structures
+serde = "1.0"
+# JSON serialization
+serde_json = "1.0"
+# attach serialize and deserialize traits to data structures
+serde_derive = "1.0"
+
+# Web libs
+# Webserver framework
+warp = "0.3"
+
+# DB libs
+# Async SQL toolkit 
+sqlx = { version = "0.5", features = ["runtime-tokio-rustls", "postgres"] }
+# SQL builder 
+sqlb = "0.0.7"
+
+[dev-dependencies]
+# Easy error handling for dev
+anyhow = "1"

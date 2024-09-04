@@ -1,0 +1,5 @@
+.*
+!.gitignore
+
+# Rust dev assets
+target/
