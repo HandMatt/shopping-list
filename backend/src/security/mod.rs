@@ -1,6 +1,7 @@
 use crate::model::Db;
 use thiserror::Error as ThisError;
 
+/// User Context
 pub struct UserCtx {
     pub user_id: i64,
 }

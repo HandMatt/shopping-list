@@ -4,6 +4,7 @@ mod grocery;
 // re-export
 pub use db::init_db;
 pub use db::Db;
+pub use grocery::{Grocery, GroceryMac, GroceryPatch, GroceryStatus};
 
 // region:    Error
 /// model error

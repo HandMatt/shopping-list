@@ -82,8 +82,24 @@ May need to install `docker`, `rustup` and `cargo watch`.
 docker run --rm -p 5432:5432 -e "POSTGRES_PASSWORD=postgres" --name pg postgres:14
 ```
 
+### Dev Test 
+
 ```sh
 # Test for db
 cargo watch -q -c -w src/ -x 'test model_db -- --test-threads=1 --nocapture'
 ```
 
+```sh
+# Test for model
+cargo watch -q -c -w src/ -x 'test model_ -- --test-threads=1 --nocapture'
+```
+
+```sh
+# Test for web                      v-- this is a filter
+cargo watch -q -c -w src/ -x 'test web_ -- --test-threads=1 --nocapture'
+```
+
+```sh
+# All backend tests
+cargo watch -q -c -w src/ -x 'test web_ -- --test-threads=1 --nocapture'
+```

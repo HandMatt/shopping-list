@@ -3,7 +3,6 @@ use sqlx::{Pool, Postgres};
 use std::fs;
 use std::path::PathBuf;
 use std::time::Duration;
-use warp::filters::sse::keep_alive;
 
 const PG_HOST: &str = "localhost";
 const PG_ROOT_DB: &str = "postgres";

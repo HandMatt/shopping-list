@@ -1,5 +1,6 @@
 use super::init_db;
 
+/// Test model DB initialize
 #[tokio::test]
 async fn model_db_init_db() -> Result<(), Box<dyn std::error::Error>> {
     // ACTION
