@@ -1,9 +1,11 @@
 #![allow(unused)] // silence unused warnings while exploring (to comment out)
 
-use std::sync::Arc;
 use model::init_db;
+use std::sync::Arc;
 mod model;
+mod security;
 
+/// main - entry point to the application
 #[tokio::main]
 async fn main() {
     // get the database
