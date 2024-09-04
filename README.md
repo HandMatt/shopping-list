@@ -71,4 +71,19 @@ Based on a todo application I recently built.
 
 ---
 
+## Setup
+
+May need to install `docker`, `rustup` and `cargo watch`.  
+
+### DB
+
+```sh
+# Start the database - from /backend
+docker run --rm -p 5432:5432 -e "POSTGRES_PASSWORD=postgres" --name pg postgres:14
+```
+
+```sh
+# Test for db
+cargo watch -q -c -w src/ -x 'test model_db -- --test-threads=1 --nocapture'
+```
 
