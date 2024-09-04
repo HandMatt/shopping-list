@@ -1,9 +1,8 @@
-#![allow(unused)] // silence unused warnings while exploring (to comment out)
+//#![allow(unused)] // silence unused warnings while exploring (to comment out)
 
 use model::init_db;
-use web::start_web;
-
 use std::{env, sync::Arc};
+use web::start_web;
 
 mod model;
 mod security;

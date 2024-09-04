@@ -46,7 +46,7 @@ impl GroceryMac {
     /// create - create a new grocery
     pub async fn create(
         db: &Db,
-        utx: &UserCtx,
+        _utx: &UserCtx,
         data: GroceryPatch,
     ) -> Result<Grocery, model::Error> {
         let mut fields = data.fields();
