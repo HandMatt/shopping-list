@@ -1,3 +1,2 @@
+import './ui/commons.js';
 import './ui/grocery-mvc.js';
-
-console.log("->> hello from main.ts");
