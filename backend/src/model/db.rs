@@ -20,6 +20,7 @@ const SQL_RECREATE: &str = "sql/00-recreate-db.sql";
 
 pub type Db = Pool<Postgres>;
 
+/// Initialize the db
 pub async fn init_db() -> Result<Db, sqlx::Error> {
     // -- Create the db with PG_ROOT (dev only)
     {
@@ -47,6 +48,7 @@ pub async fn init_db() -> Result<Db, sqlx::Error> {
     new_db_pool(PG_HOST, PG_APP_DB, PG_APP_USER, PG_APP_PWD, PG_APP_MAX_CON).await
 }
 
+/// Execute a sql file
 async fn pexec(db: &Db, file: &str) -> Result<(), sqlx::Error> {
     // Read the file
     let content = fs::read_to_string(file).map_err(|ex| {
@@ -67,6 +69,7 @@ async fn pexec(db: &Db, file: &str) -> Result<(), sqlx::Error> {
     Ok(())
 }
 
+/// Create a new db pool
 async fn new_db_pool(
     host: &str,
     db: &str,
