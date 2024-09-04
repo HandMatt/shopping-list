@@ -1,4 +1,5 @@
 import { BaseHTMLElement, customElement, getChild, getChildren, html } from "dom-native";
+import { Grocery, groceryMco } from "src/model/grocery-mco";
 
 @customElement("grocery-mvc")
 class GroceryMvc extends BaseHTMLElement {
@@ -20,13 +21,11 @@ class GroceryMvc extends BaseHTMLElement {
     }
 
     async refresh() {
-        let groceries = [
-            { id: 1, name: "mock1", cost: 50, status: 'Basket' },
-            { id: 2, name: "mock2", cost: 50, status: 'Shelf' }
-        ];
+        let groceries: Grocery[] = await groceryMco.list();
         let htmlContent = document.createDocumentFragment();
         for (const grocery of groceries) {
             const el = document.createElement('grocery-item');
+            el.data = grocery; // grocery will be froszen
             htmlContent.append(el);
         }
 
@@ -59,6 +58,17 @@ declare global {
 @customElement("grocery-item")
 export class GroceryItem extends BaseHTMLElement { // extends HTMLElement
     #titleEl!: HTMLElement;
+    #data!: Grocery;
+
+    set data(data: Grocery) {
+        let oldData = this.#data;
+        this.#data = Object.freeze(data);
+        if (this.isConnected) {
+            this.refresh(oldData);
+        }
+    }
+
+    get data() { return this.#data };
 
     init() {
         let htmlContent = html`
@@ -69,6 +79,20 @@ export class GroceryItem extends BaseHTMLElement { // extends HTMLElement
         this.#titleEl = getChild(htmlContent, 'div');
 
         this.append(htmlContent);
+        this.refresh();
+    }
+
+    refresh(old?: Grocery) {
+        if (old != null) {
+            this.classList.remove(`Grocery-${old.id}`);
+            this.classList.remove(old.status);
+        }
+
+        // render new data
+        const grocery = this.#data;
+        this.classList.add(`Grocery-${grocery.id}`);
+        this.classList.add(grocery.status);
+        this.#titleEl.textContent = grocery.name;
     }
 }
 // grocery-item type augmentation
