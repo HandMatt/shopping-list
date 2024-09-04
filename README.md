@@ -101,5 +101,22 @@ cargo watch -q -c -w src/ -x 'test web_ -- --test-threads=1 --nocapture'
 
 ```sh
 # All backend tests
-cargo watch -q -c -w src/ -x 'test web_ -- --test-threads=1 --nocapture'
+cargo watch -q -c -w src/ -x 'test -- --test-threads=1 --nocapture'
+```
+
+## Dev Web
+
+```sh
+# Serve the front end
+cargo watch -q -c -w src/ -x 'run -- ../frontend/web-folder'
+```
+
+## FRONTEND
+
+Before proceeding with building the frontend make sure you are using an up-to-date version of npm: 
+
+```sh
+npm install
+npm i -D tslib
+npm run build -- -w
 ```
