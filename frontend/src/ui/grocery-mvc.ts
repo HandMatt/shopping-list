@@ -1,12 +1,10 @@
-import { BaseHTMLElement, customElement, getChild, getChildren, html } from "dom-native";
+import { BaseHTMLElement, customElement, first, getChild, getChildren, html, OnEvent, onEvent, onHub } from "dom-native";
 import { Grocery, groceryMco } from "src/model/grocery-mco";
 
 @customElement("grocery-mvc")
-class GroceryMvc extends BaseHTMLElement {
+class GroceryMvc extends BaseHTMLElement { // extends HTMLElement
     #groceryInputEl!: GroceryInput;
     #groceryListEl!: HTMLElement;
-
-
     init() {
         let htmlContent: DocumentFragment = html`
             <div class="box"></div>
@@ -32,6 +30,34 @@ class GroceryMvc extends BaseHTMLElement {
         this.#groceryListEl.innerHTML = '';
         this.#groceryListEl.append(htmlContent);
     }
+
+    // #region    --- UI Events
+    @onEvent('pointerup', 'c-check')
+    onCheckGrocery(evt: PointerEvent & OnEvent) {
+        const groceryItem = evt.selectTarget.closest("grocery-item")!;
+        const status = groceryItem.data.status == 'Shelf' ? 'Basket' : 'Shelf';
+        // update to server
+        groceryMco.update(groceryItem.data.id, { status });
+    }
+    // #endregion --- UI Events
+
+    // #region    --- Data Events
+    @onHub('dataHub', 'Grocery', 'update')
+    onGroceryUpdate(data: Grocery) {
+        // find the grocery in the UI
+        const groceryItem = first(this, `grocery-item.Grocery-${data.id}`) as GroceryItem | undefined;
+        // if found, update it
+        if (groceryItem) {
+            groceryItem.data = data; // data will be frozen      
+        }
+    }
+
+    @onHub('dataHub', 'Grocery', 'create')
+    onGroceryCreate(data: Grocery) {
+        this.refresh();
+    }
+    // #endregion --- Data Events
+
 }
 
 @customElement("grocery-input")
@@ -47,6 +73,32 @@ class GroceryInput extends BaseHTMLElement { // extends HTMLElement
 
         this.append(htmlContent);
     }
+
+    // #region    --- UI Events
+    @onEvent('keyup', 'input')
+    onInputKeyUp(evt: KeyboardEvent) {
+        if (evt.key == "Enter") {
+            // get value from UI
+            const name = this.#inputEl.value;
+            // send create to server
+            groceryMco.create({ name });
+            // don't wait, reset value input
+            this.#inputEl.value = '';
+        }
+    }
+    // #endregion --- UI Events
+
+    // #region    --- Data Events
+    @onHub('dataHub', 'Grocery', 'update')
+    onGroceryUpdate(data: Grocery) {
+        // find the grocery in the UI
+        const groceryItem = first(this, `grocery-item.Grocery-${data.id}`) as GroceryItem | undefined;
+        // if found, update it
+        if (groceryItem) {
+            groceryItem.data = data; // data will be frozen      
+        }
+    }
+    // #endregion --- Data Events
 }
 // grocery-input tag
 declare global {

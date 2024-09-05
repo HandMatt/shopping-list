@@ -12,11 +12,11 @@ The customer has provided 10 user stories to help guide the development process 
 
 ### Story Requirements
 
-1. Create a shopping list that can contain a list of groceries
-2. Create a way for a user to add an item to the shopping list
+1. ~~Create a shopping list that can contain a list of groceries~~
+2. ~~Create a way for a user to add an item to the shopping list~~
 3. Create a way for a user to remove an item from the shopping list
-4. Create a way for users to know what they have and haven't already picked up
-5. Persist shopping list state between page visits
+4. ~~Create a way for users to know what they have and haven't already picked up~~
+5. ~~Persist shopping list state between page visits~~
 6. Create a way for user to be able to change the order of items in their shopping list
 7. Display the total cost for the whole shop
 8. Put a spending limit in place alerting the user when they go over the limit
@@ -104,14 +104,14 @@ cargo watch -q -c -w src/ -x 'test web_ -- --test-threads=1 --nocapture'
 cargo watch -q -c -w src/ -x 'test -- --test-threads=1 --nocapture'
 ```
 
-## Dev Web
+### Dev Web
 
 ```sh
 # Serve the front end
 cargo watch -q -c -w src/ -x 'run -- ../frontend/web-folder'
 ```
 
-## FRONTEND
+### FRONTEND
 
 Before proceeding with building the frontend make sure you are using an up-to-date version of npm: 
 
@@ -120,3 +120,14 @@ npm install
 npm i -D tslib
 npm run build -- -w
 ```
+
+---
+
+## Todo
+
+[ ] - Add delete button to envoke DELETE method on grocery item
+[ ] - Add index property to grocery items, look into click and drag items (on mouse up update db)
+[ ] - Display cost per item, ensure user input for cost is stored in db, display total cost
+[ ] - Allow user to configure spend limit and change total display to alert user to overspend
+[ ] - Look into email client and sending shopping list
+[ ] - User log in system, email address, cid, and spend limit can all be stored in user row
