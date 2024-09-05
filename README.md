@@ -125,9 +125,9 @@ npm run build -- -w
 
 ## Todo
 
-[ ] - Add delete button to envoke DELETE method on grocery item
-[ ] - Add index property to grocery items, look into click and drag items (on mouse up update db)
-[ ] - Display cost per item, ensure user input for cost is stored in db, display total cost
-[ ] - Allow user to configure spend limit and change total display to alert user to overspend
-[ ] - Look into email client and sending shopping list
-[ ] - User log in system, email address, cid, and spend limit can all be stored in user row
+- [ ] Add delete button to envoke DELETE method on grocery item
+- [ ] Add index property to grocery items, look into click and drag items (on mouse up update db)
+- [ ] Display cost per item, ensure user input for cost is stored in db, display total cost
+- [ ] Allow user to configure spend limit and change total display to alert user to overspend
+- [ ] Look into email client and sending shopping list
+- [ ] User log in system, email address, cid, and spend limit can all be stored in user row
